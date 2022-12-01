@@ -2,7 +2,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { plants_page  } from "../Images"
 import { dp, sp } from '../utils'
 
-const PlantCard = ({style}) => {
+const PlantCard = ({style, item}) => {
     return (
     <View style={[styles.container, style]}>
         <View style={ styles.img_block }>
@@ -16,10 +16,10 @@ const PlantCard = ({style}) => {
             <View style={{flexDirection: 'row', marginBottom: 15}}>
                 <View style={{flex: 2}}>
                     <Text style={{fontSize: sp(22), fontWeight: '800', color: '#fff', marginBottom: dp(12.5)}}>
-                        Café Figma
+                        { item.name }
                     </Text>
                     <Text style={{fontSize: sp(12), fontWeight: '600', color: '#EBEBF5'}}>
-                        Order your favorite coffee and snacks to go.
+                        { item.description }
                     </Text>
                 </View>
                 <TouchableOpacity style={{
@@ -44,8 +44,8 @@ const PlantCard = ({style}) => {
             <View style={ styles.hr } />
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.card_params_text}>28.9 C°</Text>
-                <Text style={styles.card_params_text}>68%</Text>
+                <Text style={styles.card_params_text}>{ item.temperature }</Text>
+                <Text style={styles.card_params_text}>{ item.wet }</Text>
             </View>
         </View>
     </View>
