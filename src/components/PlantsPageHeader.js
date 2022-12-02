@@ -1,6 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native"
 import { dp, sp } from "../utils"
-import {useEffect, useRef} from 'react';
 import SearchBar from "./SearchBar"
 
 const PlantsPageHeader = ({style}) => {

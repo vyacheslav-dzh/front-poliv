@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     info_block: {
         flex: 2,
         flexDirection: 'row',
-        bottom: dp(150)
+        bottom: dp(120)
     },
 
     water_lvl_block: {
