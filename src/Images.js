@@ -10,8 +10,9 @@ export const main_page =  {
         liters: require('../assets/page-main/icon-liters.png'),
         temp: require('../assets/page-main/icon-temp.png'),
         plants: require('../assets/page-main/icon-plants.png'),
+        power: require('../assets/page-main/icon-power.png')
     },
-    lineika: require('../assets/page-main/lineika.png')
+    water_lvl: require('../assets/page-main/water-lvl.png')
 }
 
 
