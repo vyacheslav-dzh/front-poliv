@@ -1,9 +1,19 @@
-import PlantsPage from './src/pages/PlantsPage';
 import { NavigationContainer } from '@react-navigation/native';
-import MainPage from './src/pages/MainPage';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Tabs from './src/components/Tabs';
 
-export default function App() {
+
+const Tab = createBottomTabNavigator()  
+
+const App = () => {
+  
+  
   return (
-    <MainPage/>
-  );
+    <NavigationContainer>
+       <Tabs/>
+    </NavigationContainer>
+  )
 }
+
+
+export default App
