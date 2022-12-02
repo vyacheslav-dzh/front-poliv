@@ -8,7 +8,7 @@ import { dp } from '../utils';
 
 
 
-function PlantsPage () {
+const PlantsPage = () => {
     const [items, setItems] = useState([...Array(20).keys()].map(number => ({
         id: number,
         name: `plant ${number}`,
