@@ -1,4 +1,5 @@
 import { main_page } from '../Images'
+import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, ImageBackground, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react';
 import IconInfo from '../components/IconInfo';
@@ -15,6 +16,7 @@ const MainPage = () => {
         <View style={{flex: 1}}>
             <ImageBackground source={main_page.background} style={styles.bg_img}>
                 <SafeAreaView style={{flex: 1}}>
+                    <StatusBar style="auto"/>
                     <DropShadow style={styles.shadow_btn}>
                         <TouchableOpacity style={styles.power_btn}>
                             <Image 
