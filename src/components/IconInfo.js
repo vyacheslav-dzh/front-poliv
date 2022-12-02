@@ -1,9 +1,9 @@
 import { StyleSheet, View, Text, Image } from "react-native";
 import { dp, sp } from '../utils';
 
-const IconInfo = ({icon, title, description}) => {
+const IconInfo = ({icon, title, description, style}) => {
     return (
-        <View style={styles.container}>
+        <View style={[styles.container, style]}>
             <Image source={icon} style={styles.icon}/>
             <View style={styles.info}>
                 <Text style={styles.title}>
@@ -22,23 +22,22 @@ export default IconInfo;
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row', 
-        maxWidth: dp(300),
+        //maxWidth: dp(300),
         alignItems: 'center'
     },
     icon: {
         flex: 1,
-        height: '100%',
+        maxHeight: '100%',
+        maxWidth: '100%',
         resizeMode: 'contain',
     },
     info: {
         flex: 2,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
     title: {
-        fontSize: sp(36),
+        fontSize: sp(46),
     },
     description: {
-        fontSize: sp(24),
+        fontSize: sp(34),
     }
 })
