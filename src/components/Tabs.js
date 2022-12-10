@@ -4,6 +4,7 @@ import MainPage from '../pages/MainPage'
 import PlantsPage from '../pages/PlantsPage'
 import { dp } from '../utils';
 import { View, Image } from 'react-native';
+import PlantView from '../views/PlantView';
 
 const Tab = createBottomTabNavigator()
 

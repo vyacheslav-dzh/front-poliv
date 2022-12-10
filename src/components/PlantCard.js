@@ -1,13 +1,21 @@
+import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { plants_page  } from "../Images"
 import { dp, sp } from '../utils'
 
-const PlantCard = ({style, item}) => {
+const PlantCard = ({ navigation, style, item}) => {
+    const onRemovePress = () => {console.log(`removed ${item.id}`)}
+    const onOpenPress = () => {
+        navigation.navigate('PlantView', {plant: item})
+    }
     return (
     <View style={[styles.container, style]}>
         <View style={ styles.img_block }>
-            <Image source={plants_page.card_img} resizeMode='contain' style={styles.card_img}/>
-            <TouchableOpacity style={styles.close_btn}>
+            <Image source={item.img} resizeMode='contain' style={styles.card_img}/>
+            <TouchableOpacity
+                style={styles.close_btn}
+                onPress={onRemovePress}
+            >
                 <View style={ styles.close_btn_line }/>
                 <View style={[ styles.close_btn_line, {transform: [{rotate: '-45deg'}]} ]}/>
             </TouchableOpacity>
@@ -22,15 +30,18 @@ const PlantCard = ({style, item}) => {
                         { item.description }
                     </Text>
                 </View>
-                <TouchableOpacity style={{
-                    flex: 1,
-                    borderRadius: dp(24),
-                    width: dp(85),
-                    height: dp(40),
-                    backgroundColor: '#74BE17',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                }}>
+                <TouchableOpacity
+                    style={{
+                        flex: 1,
+                        borderRadius: dp(24),
+                        width: dp(85),
+                        height: dp(40),
+                        backgroundColor: '#74BE17',
+                        justifyContent: 'center',
+                        alignItems: 'center'
+                    }}
+                    onPress={onOpenPress}
+                >
                     <Text style={{
                         fontSize: sp(17),
                         fontWeight: '700',
@@ -40,7 +51,7 @@ const PlantCard = ({style, item}) => {
                     </Text>
                 </TouchableOpacity>
             </View>
-            
+
             <View style={ styles.hr } />
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
@@ -89,7 +100,6 @@ const styles = StyleSheet.create({
         height: 0.5,
         backgroundColor: '#38383A',
         marginBottom: dp(15)
-        
     },
     close_btn: {
         height: dp(26),

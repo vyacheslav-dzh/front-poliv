@@ -1,18 +1,22 @@
 
 export const plants_page = {
     background: require('../assets/page-plants/background.png'),
-    card_img: require('../assets/page-plants/item-img.png')
+    card_img: require('../assets/page-plants/item-img.png'),
+    view_background: require('../assets/page-plants/view-plant__background.png')
 }
 
 export const main_page =  {
     background: require('../assets/page-main/background.png'),
-    icons: {
-        liters: require('../assets/page-main/icon-liters.png'),
-        temp: require('../assets/page-main/icon-temp.png'),
-        plants: require('../assets/page-main/icon-plants.png'),
-        power: require('../assets/page-main/icon-power.png')
-    },
     water_lvl: require('../assets/page-main/water-lvl.png')
+}
+
+export const icons = {
+    liters: require('../assets/icons/icon-liters.png'),
+    temp: require('../assets/icons/icon-temp.png'),
+    plants: require('../assets/icons/icon-plants.png'),
+    power: require('../assets/icons/icon-power.png'),
+    power_2: require('../assets/icons/icon-power-2.png'),
+    humidity: require('../assets/icons/icon-humidity.png')
 }
 
 export const tab_icons = {
