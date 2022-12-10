@@ -32,22 +32,6 @@
                 </div>
             </div>
             </li>
-        </ul>
-    </div>
-    <hr>
-    <div>
-        <h2>Pages in queue</h2>
-        <ul>
-            <li>
-                <div>
-                    <h3>
-                        Connection page
-                    </h3>
-                    <div>
-                        This page is responsible for connection to device 
-                    </div>
-                </div>
-            </li>
             <li>
                 <div>
                     <h3>
@@ -65,6 +49,22 @@
                     </h3>
                     <div>
                         This page with basic information about the plant system 
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <hr>
+    <div>
+        <h2>Pages in queue</h2>
+        <ul>
+            <li>
+                <div>
+                    <h3>
+                        Connection page
+                    </h3>
+                    <div>
+                        This page is responsible for connection to device 
                     </div>
                 </div>
             </li>
