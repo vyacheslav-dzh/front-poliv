@@ -3,12 +3,14 @@ import { dp, sp } from "../utils"
 import SearchBar from "./SearchBar"
 
 const PlantsPageHeader = ({style}) => {
-
+    const sectionPress = () => {console.log('section changed')}
+    const searchPress = () => {console.log('search start')}
     return (
         <View style={style}>
             <View style={styles.btns}>
                 <TouchableOpacity 
                     style={[styles.plants_btns, styles.plants_btns__active]}
+                    onPress={sectionPress}
                     >
                     <Text style={[styles.btn_text, styles.btn_text__active]}>
                         мои растения
@@ -16,13 +18,14 @@ const PlantsPageHeader = ({style}) => {
                 </TouchableOpacity>
                 <TouchableOpacity 
                     style={styles.plants_btns}
+                    onPress={sectionPress}
                     >
                     <Text style={styles.btn_text}>
                         все растения
                     </Text>
                 </TouchableOpacity>
             </View>
-            <SearchBar style={styles.search_bar}/>
+            <SearchBar style={styles.search_bar} searchPress={searchPress}/>
         </View>
     )
 }

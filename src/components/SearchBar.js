@@ -4,7 +4,7 @@ import { Feather } from "@expo/vector-icons";
 import { dp } from '../utils';
 
 
-const SearchBar = ({searchPhrase, setSearchPhrase, style}) => {
+const SearchBar = ({searchPhrase, setSearchPhrase, style, searchPress}) => {
     return (
         <View  style={[styles.search_bar, style]}>
             <TextInput
@@ -14,7 +14,7 @@ const SearchBar = ({searchPhrase, setSearchPhrase, style}) => {
                 placeholderTextColor="rgba(255, 255, 255, 0.3)"
                 style={styles.search_bar__input}
             />
-            <TouchableOpacity style={styles.search_bar__icon}>
+            <TouchableOpacity style={styles.search_bar__icon} onPress={searchPress}>
                 <Feather
                     name="search"
                     color="black"

@@ -1,4 +1,4 @@
-import { main_page } from '../Images'
+import { main_page, icons } from '../Images'
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, ImageBackground, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
 import { useState } from 'react';
@@ -20,7 +20,7 @@ const MainPage = () => {
                     <DropShadow style={styles.shadow_btn}>
                         <TouchableOpacity style={styles.power_btn}>
                             <Image 
-                                source={main_page.icons.power} 
+                                source={icons.power} 
                                 style={styles.power_btn__img}
                             />
                             <Text style={styles.power_btn__title}>
@@ -31,7 +31,7 @@ const MainPage = () => {
                     <View style={styles.info_block}>
                         <View style={styles.water_lvl_block}>
                             <IconInfo
-                                icon={main_page.icons.liters}
+                                icon={icons.liters}
                                 title={`${liters} литра`}
                                 description={'воды в емкости'}
                                 style={styles.water_lvl_info}
@@ -43,12 +43,12 @@ const MainPage = () => {
                         </View>
                         <View style={styles.info}>
                             <IconInfo
-                                icon={main_page.icons.temp}
+                                icon={icons.temp}
                                 title={`${temp} C\u00b0`}
                                 description={'температура в емкости'}
                             />
                             <IconInfo
-                                icon={main_page.icons.plants}
+                                icon={icons.plants}
                                 title={plantsCount}
                                 description={'подключенных растений'}
                             />
