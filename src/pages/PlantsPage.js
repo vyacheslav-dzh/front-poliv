@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { FlatList, ImageBackground, StyleSheet, View, Image, SafeAreaView } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
 import PlantCard from '../components/PlantCard';
 import PlantsPageHeader from '../components/PlantsPageHeader';
 import  { plants_page }  from '../Images'
-import { dp } from '../utils';
+import { dp, sp } from '../utils';
 
 
 
@@ -18,6 +18,9 @@ const PlantsPage = ({navigation}) => {
       img: plants_page.card_img
   })))
   const [searchPhrase, setSearchPhrase] = useState('')
+  const appendPlant = () => {
+    console.log('not suck')
+  }
 
   return (
       <View style={styles.container}>
@@ -40,6 +43,12 @@ const PlantsPage = ({navigation}) => {
             >
             </FlatList>
           </SafeAreaView>
+          <TouchableOpacity style={styles.append_btn} onPress={appendPlant}>
+            <View style={{transform: [{translateY: dp(5)}]}}>
+              <View style={styles.plus_line}></View>
+              <View style={[styles.plus_line, {transform: [{rotate: "90deg"}, {translateX: dp(-7)}]}]}></View>
+            </View>
+          </TouchableOpacity>
         </ImageBackground>
       </View>
   );
@@ -66,5 +75,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-around',
     flexWrap: 'wrap',
+  },
+  append_btn: {
+    flex: 1,
+    position: 'absolute',
+    bottom: '2%',
+    alignSelf: 'center',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: dp(110),
+    height: dp(110),
+    backgroundColor: '#E7EAEF',
+    opacity: 0.77,
+    borderRadius: '50%',
+  },
+  plus_line: {
+    height: dp(7),
+    backgroundColor: '#738E7E',
+    width: dp(45),
+    borderRadius: '25%'
   }
 });

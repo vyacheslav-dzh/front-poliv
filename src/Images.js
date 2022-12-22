@@ -32,9 +32,14 @@ export const tab_icons = {
     }
 }
 
+export const watering_page = {
+    background: require('../assets/page-watering/view-watering__background.png')
+}
+
 
 export default {
     plants_page: plants_page,
     main_page: main_page,
-    tab_icons: tab_icons
+    tab_icons: tab_icons,
+    watering_page: watering_page
 }

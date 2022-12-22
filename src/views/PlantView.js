@@ -5,7 +5,6 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { dp, sp } from "../utils";
 import DropShadow from "react-native-drop-shadow";
-import { BlurView } from "@react-native-community/blur";
 
 const PlantView = ({route: {params}}) => {
     const plant = params.plant

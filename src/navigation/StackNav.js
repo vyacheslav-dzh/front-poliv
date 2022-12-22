@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import MainPage from "../pages/MainPage";
 import PlantsPage from "../pages/PlantsPage";
 import PlantView from "../views/PlantView";
+import WateringPage from '../pages/WateringPage'
 
 const Stack = createNativeStackNavigator();
 
@@ -13,7 +14,7 @@ const screenOptionStyle = {
 const WateringStackNavigator = () => {
     return (
       <Stack.Navigator screenOptions={screenOptionStyle}>
-          <Stack.Screen name="Watering" component={MainPage} />
+          <Stack.Screen name="Watering" component={WateringPage} />
       </Stack.Navigator>
     );
   }
