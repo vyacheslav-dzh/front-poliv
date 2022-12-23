@@ -1,9 +1,9 @@
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native"
+import { View, StyleSheet, TouchableOpacity, Text, Alert } from "react-native"
 import { dp, sp } from "../utils"
 import SearchBar from "./SearchBar"
 
 const PlantsPageHeader = ({style}) => {
-    const sectionPress = () => {console.log('section changed')}
+    const sectionPress = () => {Alert.alert('Внимание', 'Это поле пока недоступно')}
     const searchPress = () => {console.log('search start')}
     return (
         <View style={style}>

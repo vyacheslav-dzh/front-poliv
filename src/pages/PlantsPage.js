@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { FlatList, ImageBackground, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import ModalAddPot from '../components/ModalAddPot';
 import PlantCard from '../components/PlantCard';
 import PlantsPageHeader from '../components/PlantsPageHeader';
 import  { plants_page }  from '../Images'
@@ -18,9 +19,7 @@ const PlantsPage = ({navigation}) => {
       img: plants_page.card_img
   })))
   const [searchPhrase, setSearchPhrase] = useState('')
-  const appendPlant = () => {
-    console.log('not suck')
-  }
+  const [visible, setVisible] = useState(false)
 
   return (
       <View style={styles.container}>
@@ -43,7 +42,8 @@ const PlantsPage = ({navigation}) => {
             >
             </FlatList>
           </SafeAreaView>
-          <TouchableOpacity style={styles.append_btn} onPress={appendPlant}>
+          <ModalAddPot visible={visible} setVisible={setVisible}/>
+          <TouchableOpacity style={styles.append_btn} onPress={() => setVisible(true)}>
             <View style={{transform: [{translateY: dp(5)}]}}>
               <View style={styles.plus_line}></View>
               <View style={[styles.plus_line, {transform: [{rotate: "90deg"}, {translateX: dp(-7)}]}]}></View>
@@ -57,6 +57,11 @@ const PlantsPage = ({navigation}) => {
 export default PlantsPage;
 
 const styles = StyleSheet.create({
+  centeredView: {
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
   container: {
     flex: 1
   },
