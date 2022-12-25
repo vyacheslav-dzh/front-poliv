@@ -1,20 +1,23 @@
 import { useNavigation } from "@react-navigation/native"
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
 import { plants_page  } from "../Images"
+import requests from "../requests"
 import { dp, sp } from '../utils'
 
-const PlantCard = ({ navigation, style, item}) => {
-    const onRemovePress = () => {console.log(`removed ${item.id}`)}
+const PlantCard = ({ navigation, style, item, onRemovePress}) => {
     const onOpenPress = () => {
         navigation.navigate('PlantView', {plant: item})
     }
     return (
     <View style={[styles.container, style]}>
         <View style={ styles.img_block }>
-            <Image source={item.img} resizeMode='contain' style={styles.card_img}/>
+            <Image source={plants_page.card_img} resizeMode='contain' style={styles.card_img}/>
             <TouchableOpacity
                 style={styles.close_btn}
-                onPress={onRemovePress}
+                onPress={() => {
+                    console.log(item.id)
+                    onRemovePress(item.id)
+                }}
             >
                 <View style={ styles.close_btn_line }/>
                 <View style={[ styles.close_btn_line, {transform: [{rotate: '-45deg'}]} ]}/>
@@ -55,8 +58,8 @@ const PlantCard = ({ navigation, style, item}) => {
             <View style={ styles.hr } />
 
             <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                <Text style={styles.card_params_text}>{ item.temperature }</Text>
-                <Text style={styles.card_params_text}>{ item.wet }</Text>
+                <Text style={styles.card_params_text}>{ item.temperature ? item.temperature + ' C\u00b0' : 'не найдено' }</Text>
+                <Text style={styles.card_params_text}>{ item.wet ? item.wet + '%' : 'не найдено' }</Text>
             </View>
         </View>
     </View>

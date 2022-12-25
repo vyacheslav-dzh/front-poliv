@@ -1,18 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { View, Modal, Text, StyleSheet, TouchableOpacity, TextInput } from "react-native"
-import DropShadow from "react-native-drop-shadow";
 import RNPickerSelect from "react-native-picker-select";
+import requests from "../requests";
+import {generateBoxShadowStyle} from '../utils'
 
-const ModalAddPot = ({ visible, setVisible }) => {
+
+const ModalAddPot = ({ visible, setVisible, append }) => {
     const [isAppend, setIsAppend] = useState(false)
+    const [name, setName] = useState('')
+    const [plants, setPlants] = useState([])
+    const [currentPlant, setCurrentPlant] = useState()
+    const getPlants = async () => {
+        const plants = await requests.plant.get_all()
+        setPlants(plants)
+    }
+
+    useEffect(() => {
+        getPlants()
+    }, [])
     const cancel = () => {
         setIsAppend(false)
         console.log("don't send")
-        setVisible(false)
-    }
-    const append = () => {
-        setIsAppend(true)
-        console.log("send nudes")
         setVisible(false)
     }
     const opacity = 1
@@ -24,7 +32,7 @@ const ModalAddPot = ({ visible, setVisible }) => {
             visible={visible}
         >
             <View style={styles.centeredView}>
-                <DropShadow style={[styles.shadow, styles.modal]}>
+                <View style={[styles.shadow, styles.modal]}>
                     <Text style={{textAlign: 'left'}}>
                         добавь свой горшок
                     </Text>
@@ -32,19 +40,18 @@ const ModalAddPot = ({ visible, setVisible }) => {
                             placeholder="Название"
                             style={styles.input}
                             placeholderTextColor='rgba(0, 0, 0, 0.3)'
+                            value={name}
+                            onChangeText={setName}
                         />
                         <RNPickerSelect
-                            onValueChange={(value) => console.log(value)}
+                            onValueChange={(value) => setCurrentPlant(value)}
                             placeholder={{ label: "Выберите цветок", value: null  }}
                             style={styles.select}
-                            items={[
-                                { label: "Фиалка", value: 0 },
-                                { label: "Орхидея", value: 1 },
-                                { label: "Ромашка", value: 2 },
-                                { label: "Мох", value: 3 },
-                                { label: "Папортник", value: 4 },
-                                { label: "Жасмин", value: 5 },
-                            ]}
+                            items={
+                                plants.map(plant => {
+                                    return {label: plant.name, value: plant.id}
+                                })
+                            }
                         />
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <TouchableOpacity onPress={cancel} style={[styles.btn, styles.cancel_btn]}>
@@ -54,7 +61,7 @@ const ModalAddPot = ({ visible, setVisible }) => {
                                 <Text style={{color: '#fff'}}>Сохранить</Text>
                             </TouchableOpacity>
                         </View>
-                </DropShadow>
+                </View>
             </View>
         </Modal>
     )
@@ -76,16 +83,7 @@ const styles = StyleSheet.create({
         padding: 35,
         alignItems: 'center'
     },
-    shadow: {
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
-        elevation: 5
-    },
+    shadow: generateBoxShadowStyle(0, 2, '#000', 0.25, 4, 5, '#000'),
     input: {
         width: '100%',
         color: '#000',

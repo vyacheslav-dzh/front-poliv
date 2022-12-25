@@ -4,7 +4,7 @@ import { StyleSheet, View, ImageBackground, Text, SafeAreaView, TouchableOpacity
 import { useState } from 'react';
 import IconInfo from '../components/IconInfo';
 import { dp, sp } from '../utils';
-import DropShadow from 'react-native-drop-shadow';
+import {generateBoxShadowStyle} from '../utils';
 
 const MainPage = () => {
     const [liters, setLiters] = useState(1.8)
@@ -17,7 +17,7 @@ const MainPage = () => {
             <ImageBackground source={main_page.background} style={styles.bg_img}>
                 <SafeAreaView style={{flex: 1}}>
                     <StatusBar style="auto"/>
-                    <DropShadow style={styles.shadow_btn}>
+                    <View style={[styles.shadow_btn, {flex: 1}]}>
                         <TouchableOpacity style={styles.power_btn}>
                             <Image 
                                 source={icons.power} 
@@ -27,7 +27,7 @@ const MainPage = () => {
                                 система { systemState }
                             </Text>
                         </TouchableOpacity>
-                    </DropShadow>
+                    </View>
                     <View style={styles.info_block}>
                         <View style={styles.water_lvl_block}>
                             <IconInfo
@@ -81,13 +81,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center',
         marginTop: dp(70)
     },
-    shadow_btn: {
-        flex: 1,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: dp(5)},
-        shadowOpacity: dp(0.55),
-        shadowRadius: dp(18),
-    },
+    shadow_btn: generateBoxShadowStyle(0, 5, '#000', 0.55, 18, 18, '#000'),
     power_btn__img: {
         flex: 1,
         resizeMode: 'contain',

@@ -6,6 +6,7 @@ import PlantCard from '../components/PlantCard';
 import PlantsPageHeader from '../components/PlantsPageHeader';
 import  { plants_page }  from '../Images'
 import { dp, sp } from '../utils';
+import requests from '../requests'
 
 
 
@@ -18,6 +19,43 @@ const PlantsPage = ({navigation}) => {
       wet: 68 + '%',
       img: plants_page.card_img
   })))
+  //const [items, setItems] = useState([])
+  const getItems = async () => {
+    const res = await requests.pot.get_all()
+    setItems(res)
+  }
+  
+  const onRemovePress = async (id) => {
+    console.log(id)
+    await requests.pot.delete(id)
+    setItems(items.filter(item => item.id !== id))
+  }
+
+  const append = async () => {
+    const res = await requests.pot.create({
+        plant_id: currentPlant,
+        sensor_id: 0,
+        name: name,
+        soil_type: 'пошел нахуй',
+        watering_period: currentPlant.water_period,
+        check_wet: currentPlant.wet,
+        wet: currentPlant.wet
+    })
+
+    const waterChange = async () => {
+      const res = watering ? await requests.pot.on() : await requests.pot.off
+      console.log(res)
+    }
+
+    setIsAppend(true)
+    setVisible(false)
+}
+
+  // useEffect(() => {
+  //   getItems()
+  //   console.log(items)
+  // }, [])
+
   const [searchPhrase, setSearchPhrase] = useState('')
   const [visible, setVisible] = useState(false)
 
@@ -30,7 +68,7 @@ const PlantsPage = ({navigation}) => {
             <FlatList
               data={items}
               renderItem={({item}) => {
-                return <PlantCard navigation={navigation} item={item}/>
+                return <PlantCard navigation={navigation} item={item} onRemovePress={onRemovePress}/>
               }}
               keyExtractor={item => item.id}
               numColumns={2}
@@ -42,7 +80,7 @@ const PlantsPage = ({navigation}) => {
             >
             </FlatList>
           </SafeAreaView>
-          <ModalAddPot visible={visible} setVisible={setVisible}/>
+          <ModalAddPot visible={visible} setVisible={setVisible} append={append}/>
           <TouchableOpacity style={styles.append_btn} onPress={() => setVisible(true)}>
             <View style={{transform: [{translateY: dp(5)}]}}>
               <View style={styles.plus_line}></View>

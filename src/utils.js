@@ -12,4 +12,28 @@ export const sp = (px) => {
     return px / (PixelRatio.getFontScale() * PixelRatio.get())
 }
 
-export default {dp: dp, sp: sp}
+export const generateBoxShadowStyle = (
+    xOffset,
+    yOffset,
+    shadowColorIos,
+    shadowOpacity,
+    shadowRadius,
+    elevation,
+    shadowColorAndroid,
+  ) => {
+    if (Platform.OS === 'ios') {
+      return {
+        shadowColor: shadowColorIos,
+        shadowOffset: {width: xOffset, height: yOffset},
+        shadowOpacity,
+        shadowRadius,
+      };
+    } else if (Platform.OS === 'android') {
+      return {
+        elevation,
+        shadowColor: shadowColorAndroid,
+      };
+    }
+  };
+
+export default {dp: dp, sp: sp, generateBoxShadowStyle: generateBoxShadowStyle}

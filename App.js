@@ -1,7 +1,7 @@
 import { NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import TabNav from './src/navigation/TabNav';
-import { createContext, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import ConnectPage from './src/pages/ConnectPage';
 import {AuthContext} from './src/AuthContext'
 
@@ -11,7 +11,16 @@ const App = () => {
   const [isSinged, setIsSinged] = useState(false)
   const authContext = useMemo(
     () => ({
-      connect: async (key) => { setIsSinged(true) },
+      connect: async () => {
+        // const status = await requests.system.connect()
+        // console.log(status)
+        // if (status === 200) {
+        //   setIsSinged(true)
+        // } else {
+        //   Alert.alert('Ошибка', 'Не удалось подключится')
+        // }
+        setIsSinged(true)
+      },
       unconnect: () => { setIsSinged(false) },
       state: () => {return isSinged}  
     })

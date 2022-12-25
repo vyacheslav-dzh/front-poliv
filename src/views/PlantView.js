@@ -3,11 +3,19 @@ import { plants_page, icons } from "../Images";
 import { StyleSheet } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { dp, sp } from "../utils";
-import DropShadow from "react-native-drop-shadow";
+import { dp, generateBoxShadowStyle, sp } from "../utils";
+import { useState } from "react";
+import requests from "../requests";
 
 const PlantView = ({route: {params}}) => {
     const plant = params.plant
+    const [water, setWater] = useState(plant.check_wet)
+    const changeWater = async () => {
+        plant.check_wet = !plant.check_wet
+        setWater(plant.check_wet)
+        const res = water ? await requests.pot.off(plant.id) : await requests.pot.on(plant.id)
+        console.log('res', res)
+    }
     console.log(plant)
     return (
         <ImageBackground
@@ -35,7 +43,7 @@ const PlantView = ({route: {params}}) => {
                         />
                     </View>
                     <View style={styles.header__btns}>
-                        <TouchableOpacity style={{flex: 1, alignItems: 'center'}}>
+                        <TouchableOpacity style={{flex: 1, alignItems: 'center'}} onPress={() => changeWater()}>
                             <Image
                                 source={icons.power_2}
                                 style={{
@@ -44,7 +52,7 @@ const PlantView = ({route: {params}}) => {
                                     marginBottom: dp(-40)
                                 }}
                             />
-                            <Text style={styles.header__btns__text}>включить</Text>
+                            <Text style={styles.header__btns__text}>{water ? 'выключить' : 'включить'}</Text>
                         </TouchableOpacity>
                         <TouchableOpacity>
                             <Text style={styles.header__btns__text}>редактировать</Text>
@@ -52,7 +60,7 @@ const PlantView = ({route: {params}}) => {
                     </View>
                 </View>
             </SafeAreaView>
-            <DropShadow style={styles.info_block__shadow}>
+            <View style={[styles.info_block__shadow, {flex: 2.5}]}>
                 <View
                     style={styles.info_block}
                 >
@@ -93,14 +101,18 @@ const PlantView = ({route: {params}}) => {
                         <Text style={styles.schedule_btn_text}>график полива</Text>
                     </TouchableOpacity>
                 </View>
-            </DropShadow>
+            </View>
         </ImageBackground>
     )
 }
 
 export default PlantView
 
-const styles = StyleSheet.create({
+const styles = StyleSheet.create({  
+    elevation: {
+        elevation: 20,
+        shadowColor: '#52006A',
+    },
     background: {
         flex: 1
     },
@@ -132,13 +144,7 @@ const styles = StyleSheet.create({
         paddingVertical: dp(45),
         paddingHorizontal: dp(50)
     },
-    info_block__shadow: {
-        flex: 2.5,
-        shadowColor: '#000',
-        shadowOffset: {width: 0, height: dp(-12)},
-        shadowOpacity: dp(0.55),
-        shadowRadius: dp(46),
-    },
+    info_block__shadow: generateBoxShadowStyle(0, dp(-12), '#000', 0.55, dp(46), dp(46), '#000'),
     info_block__title_block: {
         flexDirection: 'row'
     },
