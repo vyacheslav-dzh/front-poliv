@@ -1,10 +1,9 @@
 import { main_page, icons } from '../Images'
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, ImageBackground, Text, SafeAreaView, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, View, ImageBackground, Text, SafeAreaView, TouchableOpacity, Image, Platform } from 'react-native';
 import { useState } from 'react';
 import IconInfo from '../components/IconInfo';
-import { dp, sp } from '../utils';
-import {generateBoxShadowStyle} from '../utils';
+import { dp, sp, generateBoxShadowStyle } from '../utils';
 
 const MainPage = () => {
     const [liters, setLiters] = useState(1.8)
@@ -73,7 +72,7 @@ const styles = StyleSheet.create({
     },
     power_btn: {
         flexDirection: 'row',
-        borderRadius: '30%',
+        borderRadius: Platform.IOS ? '30%' : 50,
         paddingHorizontal: dp(45),
         justifyContent: 'space-between',
         backgroundColor: '#fff',

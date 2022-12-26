@@ -8,8 +8,10 @@ import {generateBoxShadowStyle} from '../utils'
 const ModalAddPot = ({ visible, setVisible, append }) => {
     const [isAppend, setIsAppend] = useState(false)
     const [name, setName] = useState('')
+    const [description, setDescription] = useState('')
     const [plants, setPlants] = useState([])
     const [currentPlant, setCurrentPlant] = useState()
+
     const getPlants = async () => {
         const plants = await requests.plant.get_all()
         setPlants(plants)
@@ -23,7 +25,6 @@ const ModalAddPot = ({ visible, setVisible, append }) => {
         console.log("don't send")
         setVisible(false)
     }
-    const opacity = 1
 
     return(
         <Modal
@@ -53,11 +54,18 @@ const ModalAddPot = ({ visible, setVisible, append }) => {
                                 })
                             }
                         />
+                        <TextInput
+                            placeholder="Описание"
+                            style={styles.input}
+                            placeholderTextColor='rgba(0, 0, 0, 0.3)'
+                            value={description}
+                            onChangeText={setDescription}
+                        />
                         <View style={{flexDirection: 'row', marginTop: 10}}>
                             <TouchableOpacity onPress={cancel} style={[styles.btn, styles.cancel_btn]}>
                                 <Text style={{color: '#8E8E93'}}>Отменить</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity onPress={append} style={[styles.btn, styles.append_btn]}>
+                            <TouchableOpacity onPress={() => {append(currentPlant, name, description)}} style={[styles.btn, styles.append_btn]}>
                                 <Text style={{color: '#fff'}}>Сохранить</Text>
                             </TouchableOpacity>
                         </View>

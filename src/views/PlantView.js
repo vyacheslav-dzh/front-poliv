@@ -13,8 +13,8 @@ const PlantView = ({route: {params}}) => {
     const changeWater = async () => {
         plant.check_wet = !plant.check_wet
         setWater(plant.check_wet)
-        const res = water ? await requests.pot.off(plant.id) : await requests.pot.on(plant.id)
-        console.log('res', res)
+        const res = water ? await requests.system.end_water(plant.id) : await requests.system.start_water(plant.id)
+        console.log(res)
     }
     console.log(plant)
     return (
@@ -78,13 +78,13 @@ const PlantView = ({route: {params}}) => {
                                 <View style={{flex: 1}}>
                                     <Image source={icons.temp} style={styles.stats_img}/>
                                 </View>
-                                <Text style={styles.stats_text}>{plant.temperature}</Text>
+                                <Text style={styles.stats_text}>{plant.temperature ? plant.temperature : '---'}</Text>
                             </View>
                             <View style={[styles.info_block__title_block__stats, {flex: 1}]}>
                                 <View style={{flex: 1}}>
                                     <Image source={icons.humidity} style={styles.stats_img}/>
                                 </View>
-                                <Text style={styles.stats_text}>{plant.wet}</Text>
+                                <Text style={styles.stats_text}>{plant.wet ? plant.wet + '%' : '---'}</Text>
                             </View>
                         </View>
                     </View>
@@ -92,7 +92,7 @@ const PlantView = ({route: {params}}) => {
                     <View style={styles.recommendations}>
                         <Text style={styles.recommendations_text}>тип грунта - {plant.ground ? plant.ground : 'не найдено'}</Text>
                         <Text style={styles.recommendations_text}>оптимальная температура - {plant.temperature ? plant.temperature : 'не найдено'}</Text>
-                        <Text style={styles.recommendations_text}>оптимальная влажность - {plant.wet ? plant.wet : 'не найдено'}</Text>
+                        <Text style={styles.recommendations_text}>оптимальная влажность - {plant.wet ? plant.wet + '%' : 'не найдено'}</Text>
                     </View>
                     <Text style={styles.info_block__description}>
                         {plant.description}

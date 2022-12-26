@@ -2,9 +2,8 @@ import { ImageBackground, StyleSheet, TouchableOpacity, View, Text } from "react
 import { SafeAreaView } from "react-native-safe-area-context"
 import { plants_page } from "../Images"
 import { StatusBar } from "expo-status-bar";
-import { dp, sp } from "../utils";
+import { dp, sp, generateBoxShadowStyle } from "../utils";
 import { AuthContext } from '../AuthContext'
-import DropShadow from "react-native-drop-shadow";
 import {useContext} from 'react'
 
 
@@ -26,13 +25,13 @@ const ConnectPage = () => {
                         для подключения устройства необходимо включить wi-fi и bluetooth
                     </Text>
                 </View>
-                <DropShadow style={styles.btn_shadow}>
+                <View style={[styles.btn_shadow, {flex: 1}]}>
                     <TouchableOpacity style={styles.btn} onPress={() => connect()}>
                         <Text style={{ fontSize: sp(48), fontWeight: '300'}}>
                             Поиск
                         </Text>
                     </TouchableOpacity>
-                </DropShadow>
+                </View>
             </SafeAreaView>
         </ImageBackground>
     )
@@ -48,13 +47,7 @@ const styles = StyleSheet.create({
         width: '65%',
         borderRadius: dp(30),
     },
-    btn_shadow: {
-        shadowColor: '#000',
-        shadowOffset: {width: -3, height: dp(9)},
-        shadowOpacity: 0.36,
-        shadowRadius: dp(50),
-        flex: 1
-    },
+    btn_shadow: generateBoxShadowStyle(-3, 9, '#000', 0.36, 50, 50, '#000'),
     title: {
         fontSize: sp(54),
         textAlign: 'center',
@@ -63,7 +56,7 @@ const styles = StyleSheet.create({
     desc: {
         alignSelf: 'center',
         maxWidth: '60%',
-        fontSize: sp(22),
+        fontSize: sp(26),
         textAlign: 'center'
     }
 })

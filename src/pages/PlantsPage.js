@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
-import { FlatList, ImageBackground, StyleSheet, View, TouchableOpacity, Text, SafeAreaView } from 'react-native';
+import { FlatList, ImageBackground, StyleSheet, View, TouchableOpacity, Text, SafeAreaView, Platform } from 'react-native';
 import ModalAddPot from '../components/ModalAddPot';
 import PlantCard from '../components/PlantCard';
 import PlantsPageHeader from '../components/PlantsPageHeader';
@@ -11,15 +11,15 @@ import requests from '../requests'
 
 
 const PlantsPage = ({navigation}) => {
-  const [items, setItems] = useState([...Array(20).keys()].map(number => ({
-      id: number,
-      name: `plant ${number}`,
-      description: `This is plant number ${number + 1}`,
-      temperature: 28.9 + ' C\u00b0',
-      wet: 68 + '%',
-      img: plants_page.card_img
-  })))
-  //const [items, setItems] = useState([])
+  // const [items, setItems] = useState([...Array(20).keys()].map(number => ({
+  //     id: number,
+  //     name: `plant ${number}`,
+  //     description: `This is plant number ${number + 1}`,
+  //     temperature: 28.9 + ' C\u00b0',
+  //     wet: 68 + '%',
+  //     img: plants_page.card_img
+  // })))
+  const [items, setItems] = useState([])
   const getItems = async () => {
     const res = await requests.pot.get_all()
     setItems(res)
@@ -31,30 +31,22 @@ const PlantsPage = ({navigation}) => {
     setItems(items.filter(item => item.id !== id))
   }
 
-  const append = async () => {
+  const append = async (currentPlant, name, description) => {
     const res = await requests.pot.create({
         plant_id: currentPlant,
-        sensor_id: 0,
         name: name,
-        soil_type: 'пошел нахуй',
-        watering_period: currentPlant.water_period,
-        check_wet: currentPlant.wet,
-        wet: currentPlant.wet
+        description: description
     })
-
-    const waterChange = async () => {
-      const res = watering ? await requests.pot.on() : await requests.pot.off
-      console.log(res)
-    }
 
     setIsAppend(true)
     setVisible(false)
+    getItems()
 }
 
-  // useEffect(() => {
-  //   getItems()
-  //   console.log(items)
-  // }, [])
+  useEffect(() => {
+    getItems()
+    console.log(items)
+  }, [])
 
   const [searchPhrase, setSearchPhrase] = useState('')
   const [visible, setVisible] = useState(false)
@@ -130,12 +122,12 @@ const styles = StyleSheet.create({
     height: dp(110),
     backgroundColor: '#E7EAEF',
     opacity: 0.77,
-    borderRadius: '50%',
+    borderRadius: Platform.IOS ? '50%': 50,
   },
   plus_line: {
     height: dp(7),
     backgroundColor: '#738E7E',
     width: dp(45),
-    borderRadius: '25%'
+    borderRadius: Platform.IOS ? '25%': 50
   }
 });

@@ -1,5 +1,5 @@
 import { useNavigation } from "@react-navigation/native"
-import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native"
+import { StyleSheet, View, Text, Image, TouchableOpacity, Platform } from "react-native"
 import { plants_page  } from "../Images"
 import requests from "../requests"
 import { dp, sp } from '../utils'
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     close_btn: {
         height: dp(26),
         width: dp(26),
-        borderRadius: '50%',
+        borderRadius: Platform.IOS ? '50%' : 50,
         backgroundColor: '#252525',
         opacity: 0.78,
         position: 'absolute',
@@ -122,7 +122,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         backgroundColor: '#8E8E93',
         transform: [{rotate: '45deg'}],
-        borderRadius: '25%'
+        borderRadius: Platform.IOS ? '25%': 25
     }
 })
 
