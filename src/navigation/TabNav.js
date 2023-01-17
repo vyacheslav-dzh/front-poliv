@@ -2,7 +2,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { tab_icons } from '../Images';
 import { WateringStackNavigator, MainStackNavigator, PlantsStackNavigator } from './StackNav';
-import { View, Image } from 'react-native';
+import { View, Image, Platform } from 'react-native';
 
 
 const Tab = createBottomTabNavigator();
@@ -22,7 +22,7 @@ const TabNav = () => {
           ? {
             width: size*3, 
             height: size*3,
-            borderRadius: '50%',
+            borderRadius: Platform.IOS ? '50%' : 50,
             justifyContent: 'center',
             alignItems: 'center',
             backgroundColor: '#292929',

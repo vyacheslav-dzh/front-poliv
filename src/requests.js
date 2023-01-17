@@ -1,7 +1,7 @@
 import { Alert } from "react-native"
 
 // must get from config
-const host = 'http://172.20.10.14'
+const host = 'http://192.168.0.110'
 const port = '5000'
 const base_url = `${host}:${port}/api`
 const headers = {
@@ -148,9 +148,21 @@ const requests = {
         },
         connect: async () => {
             return await fetch(base_url + '/connect', {
-                method: 'POST'
+                method: 'GET'
             }).then(res => {return res.status})
             .catch(e => {return 404})
+        },
+        start_water: async (pot_id) => {
+            return await fetch(base_url + '/system/pot/start_watering/' + pot_id, {
+                method: 'GET'
+            }).then(response => response.json)
+            .catch(e => Alert.alert('Connection lost', e))
+        },
+        end_water: async (pot_id) => {
+            return await fetch(base_url + '/system/pot/end_watering/' + pot_id, {
+                method: 'GET'
+            }).then(response => response.json)
+            .catch(e => Alert.alert('Connection lost', e))
         }
     }
 }

@@ -4,6 +4,8 @@ import TabNav from './src/navigation/TabNav';
 import { useMemo, useState } from 'react';
 import ConnectPage from './src/pages/ConnectPage';
 import {AuthContext} from './src/AuthContext'
+import requests from './src/requests';
+import { Alert } from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -12,14 +14,14 @@ const App = () => {
   const authContext = useMemo(
     () => ({
       connect: async () => {
-        // const status = await requests.system.connect()
-        // console.log(status)
-        // if (status === 200) {
-        //   setIsSinged(true)
-        // } else {
-        //   Alert.alert('Ошибка', 'Не удалось подключится')
-        // }
-        setIsSinged(true)
+        const status = await requests.system.connect()
+        console.log(status)
+        if (status === 200) {
+          setIsSinged(true)
+        } else {
+          Alert.alert('Ошибка', 'Не удалось подключится')
+        }
+        //setIsSinged(true)
       },
       unconnect: () => { setIsSinged(false) },
       state: () => {return isSinged}  

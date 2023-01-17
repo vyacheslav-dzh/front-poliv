@@ -3,7 +3,7 @@ import { tab_icons } from '../Images';
 import MainPage from '../pages/MainPage'
 import PlantsPage from '../pages/PlantsPage'
 import { dp } from '../utils';
-import { View, Image } from 'react-native';
+import { View, Image, Platform } from 'react-native';
 import PlantView from '../views/PlantView';
 
 const Tab = createBottomTabNavigator()
@@ -23,7 +23,7 @@ const Tabs = () => {
             ? {
               width: size*3, 
               height: size*3,
-              borderRadius: '50%',
+              borderRadius: Platform.IOS ? '50%' : 50,
               justifyContent: 'center',
               alignItems: 'center',
               backgroundColor: '#292929',
